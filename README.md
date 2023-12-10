@@ -1,49 +1,32 @@
-<a href="https://totaltypescript.com/tutorials/beginners-typescript"><img src="https://res.cloudinary.com/total-typescript/image/upload/v1664461034/beginners-typescript-tutorial/github_2x_himnyi.png" alt="beginner typescript tutorial" /></a>
+# Typescript Labs
 
-## Quickstart
+## Lab 4: Optional Parameters
 
-Take the course on [Total TypeScript](https://totaltypescript.com/tutorials/beginners-typescript). There, you'll find:
+file: `/src/04-optional-params.problem.ts`
 
-- Video explanations for each problem and solution
-- Transcripts
-- Text explanations
-- A built-in Stackblitz editor
+Our getName function has been refactored.
 
-```sh
-# Installs all dependencies
-npm install
+Now instead of taking in a single params object, it takes in first and last as individual parameters:
 
-# Asks you which exercise you'd like to run, and runs it
-npm run exercise
+```ts
+export const getName = (first: string, last: string) => {
+  if (last) {
+    return `${first} ${last}`;
+  }
+  return first;
+};
 ```
+This time TypeScript is telling us that in the first name test that it expected two arguments but only got one:
 
-## How to take the course
 
-You'll notice that the course is split into exercises. Each exercise is split into a `*.problem` and a `*.solution`.
+```ts
+it("Should work with just the first name", () => {
+  const name = getName("Matt");
 
-To take an exercise:
+  expect(name).toEqual("Matt");
+});
+```
+If we update the first name test to call getName with "Pocock" as a second argument, the error will go away. However, the test would fail at runtime.
 
-1. Run `npm run exercise`
-2. Choose which exercise you'd like to run.
-
-This course encourages **active, exploratory learning**. In the video, I'll explain a problem, and **you'll be asked to try to find a solution**. To attempt a solution, you'll need to:
-
-1. Check out [TypeScript's docs](https://www.typescriptlang.org/docs/handbook/intro.html).
-1. Try to find something that looks relevant.
-1. Give it a go to see if it solves the problem.
-
-You'll know if you've succeeded because the tests will pass.
-
-**If you succeed**, or **if you get stuck**, unpause the video and check out the `*.solution`. You can see if your solution is better or worse than mine!
-
-## Acknowledgements
-
-Say thanks to Matt on [Twitter](https://twitter.com/mattpocockuk) or by joining his [Discord](https://discord.gg/8S5ujhfTB3). Consider signing up to his [Total TypeScript course](https://totaltypescript.com).
-
-## Reference
-
-### `npm run exercise`
-
-Alias: `npm run e`
-
-Open a prompt for choosing which exercise you'd like to run.
+Challenge
+Your challenge is to work out how to mark the last parameter as optional.
